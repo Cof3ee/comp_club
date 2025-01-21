@@ -1,5 +1,6 @@
 #include "helpers.h"
 
+#include <cmath>
 #include <sstream>
 #include <stdexcept>
 #include <iomanip>
