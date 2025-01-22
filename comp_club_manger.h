@@ -31,15 +31,14 @@ private:
 
 	void session_is_over(const comp_club::event& event);
 
-	//Ќе придумал нормальное название, это дл€ ID 11
 	void client_kicked(const comp_club::event& event);
 
 	void client_seating_from_queue(const comp_club::event& event, const int &vacant_table);
 
 	int revenue_calculation_for_table(const std::pair<int, std::string> &table);
 
+private:
 	comp_club club_;
-
 	std::set <std::string> clients_in_club;
 	std::queue <std::string> clients_waiting;
 
@@ -48,11 +47,11 @@ private:
 		std::string name;
 		std::string time;
 	};
-	//«а каким столом сидит клиент, во сколько сел
+
+	//What table does the client sit at and what time does he sit down
 	std::map<int, client_name_and_time> guest_seating_log;
-	//«а каким столом, сколько времени просижено
+	//At which table, how long did you sit
 	std::map<int, std::string> table_sitting_times;
-	// акой клиент сидит за каким столом
+	//Which client sits at which table
 	std::map<std::string, int>  table_occupants;
 };
-

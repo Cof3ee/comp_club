@@ -4,23 +4,23 @@
 
 using namespace std;
 
-comp_club comp_club_parser::parse_data(const vector<string>& data)
+comp_club comp_club_parser::parse(const vector<string>& data)
 {
     comp_club club_data_;
 
-    // Парсинг количества столов
+    // Parsing the number of tables
    stringstream ss_num_tables(data[0]);
     ss_num_tables >> club_data_.num_tables;
 
-    // Парсинг времени начала и конца работы
+    // Parsing start and end times of work
     stringstream ss_time(data[1]);
     ss_time >> club_data_.start_time >> club_data_.end_time;
 
-    // Парсинг стоимости часа
+    // Hourly cost parsing
     stringstream ss_cost_hour(data[2]);
     ss_cost_hour >> club_data_.cost_hour;
 
-    // Парсинг событий
+    // Event parsing
     for (size_t i = 3; i < data.size(); ++i)
     {
         comp_club::event event;

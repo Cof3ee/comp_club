@@ -59,7 +59,7 @@ bool time_helpers::validate_time_range(const std::string& time_range)
     string start_time_str;
     string end_time_str;
 
-    //Проверка правильно ли запишутся данные из потока ss
+    //Checking whether data from the ss stream will be written correctly
     if (!(ss >> start_time_str >> end_time_str))
     {
         throw std::runtime_error(time_range);
@@ -68,7 +68,7 @@ bool time_helpers::validate_time_range(const std::string& time_range)
     Time startTime = parse_time(start_time_str);
     Time endTime = parse_time(end_time_str);
 
-    // Проверить, что время начала раньше времени конца
+    //Check that the start time is before the end time
     if (startTime.hour > endTime.hour || (startTime.hour == endTime.hour && startTime.minute >= endTime.minute))
     {
         throw std::runtime_error(time_range);
@@ -101,7 +101,7 @@ std::string time_helpers::calculate_time_sum(const std::string& time1, const std
         int minutes2 = time_to_minutes(time2);
         int totalMinutes = minutes1 + minutes2;
 
-        // Обрабатываем случай если общее время больше 24 часов
+        // We process the case if the total time is more than 24 hours
         totalMinutes = totalMinutes % (24 * 60);
 
         return format_time(totalMinutes);
@@ -110,7 +110,7 @@ std::string time_helpers::calculate_time_sum(const std::string& time1, const std
 int time_helpers::get_ceiled_hours(const std::string& timeStr)
 {
         int totalMinutes = time_to_minutes(timeStr);
-        // Преобразуем общее количество минут в часы с округлением в большую сторону
+        // Convert the total number of minutes to hours, rounding up
         double hours = static_cast<double>(totalMinutes) / 60.0;
         return static_cast<int>(std::ceil(hours));
 }

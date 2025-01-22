@@ -10,25 +10,25 @@ public:
 
 	static bool compare_times(const std::string& valid_time, const std::string& testing_time);
 
-	// Функция для вычисления разницы между двумя временами в формате "ЧЧ:ММ"
+	//Function to calculate the difference between two times in the format "HH:MM"
 	static std::string calculate_time_difference(const std::string& start_Time, const std::string& end_Time);
 
-	// Функция для сложения двух времен в формате "ЧЧ:ММ"
+	//Function for adding two times in the format "HH:MM"
 	static std::string calculate_time_sum(const std::string& time1, const std::string& time2);
 
-	// Функция для получения часов, округленных в большую сторону
+	//Function to get hours rounded up
 	static int get_ceiled_hours(const std::string& time_str);
 
-	// Функция для преобразования времени из формата "ЧЧ:ММ" в минуты
+	//Function to convert time from "HH:MM" format to minutes
 	static int time_to_minutes(const std::string& time_str);
 
-	//Функция для преобразования времени из string в структуру Time
+	//Function to convert time from string to Time structure
 	static Time parse_time(const std::string& time_str);
 
-	//Функция для проверки правильно ли записано время
+	//Function to check whether the time is recorded correctly
 	static bool validate_time_range(const std::string& time_range);
 private:
-	// Функция для форматирования минут в формат "ЧЧ:ММ"
+	//Function for formatting minutes in "HH:MM" format
 	static std::string format_time(int total_minutes);
 };
 

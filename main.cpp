@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
 		comp_club_description_validator validator(comp_club_description);
 		validator.validate();
 
-		comp_club club_data = comp_club_parser::parse_data(comp_club_description);
+		comp_club club_data = comp_club_parser::parse(comp_club_description);
 
 		comp_club_manger club(club_data);
 		club.manage_day();
@@ -65,6 +65,10 @@ int main(int argc, char* argv[])
 	catch (exception& ex)
 	{
 		cerr << ex.what() << std::endl;
+	}
+	catch (...)
+	{
+		cerr << "caught unhandled exception in the main thread" << endl;
 	}
 
 	return 0;
