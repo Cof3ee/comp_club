@@ -1,5 +1,5 @@
 #include "comp_club_manger.h"
-#include "helpers.h"
+#include "time_helpers.h"
 
 #include <iostream>
 
@@ -89,7 +89,7 @@ void comp_club_manger::process_ID_event(const comp_club::event& event)
 //Пришёл клиент
 void comp_club_manger::handle_client_arrival(const comp_club::event& event) 
 {
-	if (helpers::compare_times(club_.start_time,event.time)) //Пришёл в нерабочие часы
+	if (time_helpers::compare_times(club_.start_time,event.time)) //Пришёл в нерабочие часы
 	{
 		cout << event.time << " " << "13 " << "NotOpenYet" << endl;
 	}
@@ -194,12 +194,12 @@ void comp_club_manger::session_is_over(const comp_club::event& event)
 
 	if (table.empty()) //Если столу записывается время впервые
 	{
-		table = helpers::calculate_time_difference(session_start_time, event.time);
+		table = time_helpers::calculate_time_difference(session_start_time, event.time);
 	}
 	else //Сумирование времени за столом, с последней сессией
 	{
-		string last_session_time = helpers::calculate_time_difference(session_start_time, event.time);
-		table = helpers::calculate_time_sum(last_session_time, table);
+		string last_session_time = time_helpers::calculate_time_difference(session_start_time, event.time);
+		table = time_helpers::calculate_time_sum(last_session_time, table);
 	}
 	tables[table_occupants[event.client_name]].name = "";
 	tables[table_occupants[event.client_name]].time = "";
@@ -232,7 +232,7 @@ void comp_club_manger::client_seating_from_queue(const comp_club::event& event, 
 
 int comp_club_manger::revenue_calculation_for_table(const std::pair<int, std::string> &table)
 {
-	int total_working_hours = helpers::get_ceiled_hours(table_sitting_times[table.first]);
+	int total_working_hours = time_helpers::get_ceiled_hours(table_sitting_times[table.first]);
 
 	return total_working_hours * club_.cost_hour;
 }

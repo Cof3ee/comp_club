@@ -1,6 +1,5 @@
 #include "comp_club_description_validator.h"
-#include "validator_time.h"
-#include "helpers.h"
+#include "time_helpers.h"
 
 #include <sstream> 
 #include <cctype>
@@ -28,7 +27,7 @@ void comp_club_description_validator::validate()
     // Проверка первого элемента (целое число больше 0)
     validate_first_element(data_[0]);
     // Проверка второго элемента (диапазон времени)
-    validator_time::validate_time_range(data_[1]);
+    time_helpers::validate_time_range(data_[1]);
     // Проверка третьего элемента (целое число не равно 0 и больше 0)
     validate_third_element(data_[2]);
     //Проверка последовательности времени events
@@ -68,7 +67,7 @@ void comp_club_description_validator::validate_time_is_sorted(const std::vector<
 
     for (const auto& str : data)
     {
-        times.push_back(helpers::time_to_minutes(str));
+        times.push_back(time_helpers::time_to_minutes(str));
     }
     
     if (!std::is_sorted(times.begin(), times.end()))
@@ -116,30 +115,7 @@ void comp_club_description_validator::validate_other_elements(const std::string&
     try
     {
         // Пытаемся разобрать время
-        validator_time::parse_time(time_str);
-
-       //if(time_of_last_event_.empty())
-       //{
-       //    time_of_last_event_ = time_str;
-       //}
-       //else
-       //{    //Проверка на последовательность времени событий
-       //    if (helpers::compare_times(time_of_last_event_, time_str))
-       //    {
-       //        if(time_of_last_event_!=time_str)
-       //        {
-       //            throw std::runtime_error(line);
-       //        }
-       //        else
-       //        {
-       //            time_of_last_event_ = time_str;
-       //        }
-       //    }
-       //    else
-       //    {
-       //        time_of_last_event_ = time_str;
-       //    }
-       //}
+        time_helpers::parse_time(time_str);
     }
     catch (exception& ex)
     {
