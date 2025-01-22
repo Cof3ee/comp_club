@@ -49,7 +49,7 @@ private:
 		std::string time;
 	};
 	//«а каким столом сидит клиент, во сколько сел
-	std::map<int, client_name_and_time> tables;
+	std::map<int, client_name_and_time> guest_seating_log;
 	//«а каким столом, сколько времени просижено
 	std::map<int, std::string> table_sitting_times;
 	// акой клиент сидит за каким столом

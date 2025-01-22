@@ -9,7 +9,7 @@ comp_club_manger::comp_club_manger(const comp_club& club_data) : club_(club_data
 {
 	for (int num_table = 1; num_table < club_data.num_tables+1; num_table++)
 	{
-		tables[num_table];
+		guest_seating_log[num_table];
 		table_sitting_times[num_table];
 	}
 }
@@ -106,7 +106,7 @@ void comp_club_manger::handle_client_arrival(const comp_club::event& event)
 //Клиент сел за стол
 void comp_club_manger::handle_client_seating(const comp_club::event& event)
 {
-	if (!tables[*event.num_table].name.empty())//Если выбранный стол занят
+	if (!guest_seating_log[*event.num_table].name.empty())//Если выбранный стол занят
 	{
 		cout << event.time << " " << "13 " << "PlaceIsBusy" << endl;
 	}
@@ -128,9 +128,9 @@ void comp_club_manger::handle_client_waiting(const comp_club::event& event)
 	bool free_table = false;
 	
 	//Проверяем заняты ли столы
-	for (int index = 1; index <= tables.size(); index++)
+	for (int index = 1; index <= guest_seating_log.size(); index++)
 	{
-		if (tables[index].name.empty())
+		if (guest_seating_log[index].name.empty())
 		{
 			cout << event.time << " " << "13 " << "ICanWaitNoLonger!" << endl;
 			free_table = true;
@@ -180,8 +180,8 @@ void comp_club_manger::handle_client_leaving(const comp_club::event& event)
 void comp_club_manger::session_is_start(const comp_club::event& event)
 {
 	//Сажаем клиента за стол
-	tables[*event.num_table].name = event.client_name;
-	tables[*event.num_table].time = event.time;
+	guest_seating_log[*event.num_table].name = event.client_name;
+	guest_seating_log[*event.num_table].time = event.time;
 
 	//Ведём учёт за каким столом сидит клиент
 	table_occupants[event.client_name] = *event.num_table;
@@ -189,7 +189,7 @@ void comp_club_manger::session_is_start(const comp_club::event& event)
 
 void comp_club_manger::session_is_over(const comp_club::event& event)
 {
-	const string session_start_time = tables[table_occupants[event.client_name]].time;
+	const string session_start_time = guest_seating_log[table_occupants[event.client_name]].time;
 	auto& table = table_sitting_times[table_occupants[event.client_name]];
 
 	if (table.empty()) //Если столу записывается время впервые
@@ -201,8 +201,8 @@ void comp_club_manger::session_is_over(const comp_club::event& event)
 		string last_session_time = time_helpers::calculate_time_difference(session_start_time, event.time);
 		table = time_helpers::calculate_time_sum(last_session_time, table);
 	}
-	tables[table_occupants[event.client_name]].name = "";
-	tables[table_occupants[event.client_name]].time = "";
+	guest_seating_log[table_occupants[event.client_name]].name = "";
+	guest_seating_log[table_occupants[event.client_name]].time = "";
 
 	table_occupants.erase(event.client_name);
 }
