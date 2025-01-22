@@ -36,7 +36,7 @@ static vector<string> read_file_to_vector(const string &path)
 
 int main(int argc, char* argv[])
 {
-	setlocale(LC_ALL, "ru");
+	int exit_code = EXIT_SUCCESS;
 
 	string path;
 
@@ -65,11 +65,13 @@ int main(int argc, char* argv[])
 	catch (exception& ex)
 	{
 		cerr << ex.what() << std::endl;
+		exit_code = EXIT_FAILURE;
 	}
 	catch (...)
 	{
 		cerr << "caught unhandled exception in the main thread" << endl;
+		exit_code = EXIT_FAILURE;
 	}
 
-	return 0;
+	return exit_code;
 }

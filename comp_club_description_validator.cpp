@@ -122,7 +122,7 @@ void comp_club_description_validator::validate_other_elements(const string& line
     }
 
     // Checking that the identifier is within acceptable limits
-    if (id != 1 && id != 2 && id != 3 && id != 4 && id != 11 && id != 12 || id != 13)
+    if (id != 1 && id != 2 && id != 3 && id != 4 && id != 11 && id != 12 && id != 13)
     {
         throw runtime_error(line);
     }
