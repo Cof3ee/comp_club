@@ -57,8 +57,7 @@ int main(int argc, char* argv[])
 		comp_club_description_validator validator(comp_club_description);
 		validator.validate();
 
-		comp_club_parser parser(comp_club_description);
-		comp_club club_data = parser.get_comp_club_data();
+		comp_club club_data = comp_club_parser::parse_data(comp_club_description);
 
 		comp_club_manger club(club_data);
 		club.manage_day();
