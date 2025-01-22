@@ -141,5 +141,3 @@ void comp_club_description_validator::validate_other_elements(const string& line
         }
     }
 }
-
-

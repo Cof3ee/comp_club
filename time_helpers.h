@@ -31,4 +31,3 @@ private:
 	//Function for formatting minutes in "HH:MM" format
 	static std::string format_time(int total_minutes);
 };
-

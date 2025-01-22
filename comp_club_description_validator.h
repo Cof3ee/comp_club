@@ -35,4 +35,3 @@ private:
 	std::string time_of_last_event_;
 	std::vector<std::string> data_; 
 };
-
