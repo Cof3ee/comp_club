@@ -49,7 +49,11 @@ void comp_club_manger::end_day()
 			
 			event_.client_name = name;
 			event_.time = club_.end_time;
-			event_.num_table = table_occupants[name];
+
+			if(table_occupants.find(name)!= table_occupants.end())
+			{
+				event_.num_table = table_occupants[name];
+			}
 
 			client_kicked(event_);
 		}
@@ -215,9 +219,12 @@ void comp_club_manger::client_kicked(const comp_club::event& event)
 {
 	cout << event.time << " " << "11 " << event.client_name << endl;
 
-	if (clients_in_club.find(event.client_name) != clients_in_club.end())
+	if(event.num_table!=nullopt)
 	{
-		session_is_over(event);
+		if (clients_in_club.find(event.client_name) != clients_in_club.end())
+		{
+			session_is_over(event);
+		}
 	}
 }
 
