@@ -27,7 +27,10 @@ static vector<string> read_file_to_vector(const string &path)
 		string line;
 		while (getline(fs, line))
 		{
-			data.push_back(line);
+			if(line!="") //Checking if there are empty lines in the file
+			{
+				data.push_back(line);
+			}
 		}
 	}
 
