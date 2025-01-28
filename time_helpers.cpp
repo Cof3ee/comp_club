@@ -20,7 +20,14 @@ bool time_helpers::compare_times(const string& first, const string& second)
     }
     else if (firstHour == secondHour)
     {
-        return firstMinute >= secondMinute;
+        if (firstMinute == secondMinute)
+        {
+            return false;
+        }
+        else
+        {
+            return firstMinute >= secondMinute;
+        }
     }
     return false;
 }
