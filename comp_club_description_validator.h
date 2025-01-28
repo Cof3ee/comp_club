@@ -32,6 +32,6 @@ private:
 private:
 	int tables_count_ = 0; 
 	int cost_hour_ = 0; 
-	std::string time_of_last_event_;
+	/*std::string time_of_last_event_;*/
 	std::vector<std::string> data_; 
 };
