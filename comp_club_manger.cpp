@@ -93,6 +93,10 @@ void comp_club_manger::handle_client_arrival(const comp_club::event& event)
 	{
 		cout << event.time << " " << "13 " << "NotOpenYet" << endl;
 	}
+	else if(!time_helpers::compare_times(club_.end_time, event.time))
+	{
+		cout << event.time << " " << "13 " << "NotOpenYet" << endl;
+	}
 	else if (clients_in_club.find(event.client_name) != clients_in_club.end()) //Already in the club
 	{
 		cout << event.time << " " << "13 " << "YouShallNotPass" << endl; 
